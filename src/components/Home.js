@@ -1,5 +1,5 @@
 import { db } from '../firebase-config';
-import { collection, deleteDoc, getDocs,doc } from 'firebase/firestore';
+import { collection, deleteDoc, getDocs,doc, onSnapshot } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
 
@@ -9,21 +9,50 @@ const userCollectionRef = collection(db, "data");
 
 
 const updateDataFun = async(id, title) => {};
+
 const deleteDataFun = async(id) => {
-  // const dataDoc  = doc(db, "data", id);
-  // await deleteDoc(dataDoc);
+  try{
+ 
+  await deleteDoc(doc(db, "data", id));
+  setData(data.filter((item) => item.id !== id))
+  }catch(err){
+    console.log(err);
+  }
 }
 
+ useEffect(() => {
+  
+//     const fetchData = async() => {
+//       let list = [];
+//       try{
 
-    useEffect(() => {
-        const getData = async() => {
-          const info = await getDocs(userCollectionRef);
-          setData(info.docs.map((doc ) => ({
-            ...doc.data(), id:doc.id
-          })))
-        }
-        getData();
-      },[])
+//         const querySnapshot = await getDocs(collection(db, "data"));
+//         querySnapshot.forEach((doc) => {
+//           list.push({ id:doc.id, ...doc.data()});
+//         });
+//         setData(list);
+//       }catch(err){
+//           console.log(err);
+//       }
+//     };
+// fetchData();
+//realtime data fetching using snapshot
+
+  const fetchData = onSnapshot(collection(db,"data"), (snapshot) => {
+    let list = [];
+
+    snapshot.docs.forEach((doc) => {
+      list.push({ id:doc.id , ...doc.data() });
+    })
+    setData(list);
+  }, (error) => {
+    console.log(error);
+  });
+  return() => {
+    fetchData();
+  }
+  },[])
+
 
 console.log(data)
 return (
@@ -33,11 +62,11 @@ return (
      {
       data.map((doc ) => {
         return (
-        <div>
+        <div key={doc.id} >
             <p>title: {doc.title}</p>
             <p>desc: {doc.desc}</p>
             <div className="home-buttons">
-            <button className="delete-div" onClick={deleteDataFun(doc.id)}>Delete</button>
+            <button className="delete-div" onClick={() => deleteDataFun(doc.id)}>Delete</button>
            <button className="update-div" onClick={updateDataFun}>Update</button>
             </div>
         </div>
