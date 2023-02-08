@@ -1,0 +1,27 @@
+.navbar-container{
+  border-bottom: 2px solid #fff;
+  h2{
+    font-weight: 800;
+  }
+}
+
+
+.home-container{
+    width: 70vw;
+
+    .item{
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        .description{
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 50vw;
+        }
+
+        h2{
+            font-weight: 400;
+        }
+
+    }
+}
