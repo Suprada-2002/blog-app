@@ -6,3 +6,23 @@ body{
     align-items: center;
 }
 
+nav{
+    border-bottom: 2px solid #fff;
+}
+
+.link{
+    text-decoration: none;
+    padding-right: 20px;
+    font-weight: 800;
+    font-size: 1.3rem;
+}
+
+.btn{
+    color: black;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10 10 10 10;
+  }

@@ -1,14 +1,16 @@
-.navbar-container{
-  border-bottom: 2px solid #fff;
-  h2{
-    font-weight: 800;
-  }
+.btn{
+  color: black;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 10 10 10 10;
 }
 
 
 .home-container{
     width: 70vw;
-
     .item{
         padding-top: 20px;
         padding-bottom: 20px;
@@ -18,10 +20,39 @@
             overflow: hidden;
             width: 50vw;
         }
-
         h2{
             font-weight: 400;
         }
 
     }
+}
+
+.create-blog{
+  width: 70vw;
+  color: black;
+  
+  .btn{
+    color: black;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10 10 10 10;
+  }
+  
+}
+
+.login-container{
+  width: 70vw;
+  .btn{
+    color: black;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 10 10 10 10;
+  }
+  
 }

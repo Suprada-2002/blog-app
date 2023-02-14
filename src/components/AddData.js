@@ -1,18 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {addDoc, collection} from 'firebase/firestore'
 import { useNavigate } from "react-router-dom";
+import { auth, db } from "../assets/firebase-config";
+import '../assets/style.scss'
 
-function AddData() {
+function AddData({isAuth}) {
 
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const postCollectionRef = collection(db, "data");
+  const navigate = useNavigate();
 
+  const onSubmitData = async() => {
+      await addDoc(postCollectionRef, {title, 
+        text,
+         author:{name:auth.currentUser.displayName , id:auth.currentUser.uid}
+        });
+         navigate('/')
+    };
 
-
-
+    useEffect(() => {
+      if(!isAuth){
+        navigate('/login');
+      }
+    }, [])
 
     return (
-      <>
-      <p>nnn</p>
-      </>
-           
+          <div className="create-blog">
+            <div className="create-blog-container">
+              <h1>Add a Blog</h1>
+              <div className="input-group">
+                  <label>Title: </label>
+                  <input placeholder="title..." 
+                  onChange={(event) => {setTitle(event.target.value)}}
+                  />
+              </div>
+              <div className="input-group">
+              <label>Description: </label>
+              <textarea placeholder="description..." 
+              onChange={(event) => {setText(event.target.value)}}
+              />
+                </div>
+                <button onClick={onSubmitData} className='btn'>Submit Blog</button>
+            </div>
+          </div>
     )
 }
 
