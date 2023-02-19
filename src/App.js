@@ -25,13 +25,13 @@ const signUserOut = () => {
       {!isAuth ?  <Link to='/login' className='link'>Login</Link> :
        <>
        <Link to='/add' className='link'>Add Data</Link>
-        <button onClick={signUserOut}>Log Out</button>
+        <button onClick={signUserOut} className='nav-btn' >Log Out</button>
         </>
       }
     </nav>
       
       <Routes>
-        <Route path='/' exact element={<Home />} />
+        <Route path='/' exact element={<Home isAuth={isAuth} />} />
         <Route path='/add' exact element={<AddData isAuth={isAuth} />} />
         <Route path='/login' exact element={<Login setIsAuth={setIsAuth} />} />
       </Routes>
