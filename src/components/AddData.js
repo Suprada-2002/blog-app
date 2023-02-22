@@ -28,7 +28,7 @@ function AddData({isAuth}) {
     return (
           <div className="create-blog">
             <div className="create-blog-container">
-              <h1>Write something new here</h1>
+              <h1 className="create-blog-header">Write something new here</h1>
               <div className="input-group">
                   <label>Title: </label>
                   <input placeholder="title..." 
@@ -37,7 +37,7 @@ function AddData({isAuth}) {
               </div>
               <div className="input-group">
               <label>Description: </label>
-              <textarea placeholder="description..." 
+              <textarea placeholder="description..." className="inp-group-textarea"
               onChange={(event) => {setText(event.target.value)}}
               />
                 </div>
